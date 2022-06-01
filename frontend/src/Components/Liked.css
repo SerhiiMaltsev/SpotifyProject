@@ -1,0 +1,15 @@
+.liked{
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: auto;
+    vertical-align: middle;
+    text-align: center;
+}
+.songsLiked{
+    align-content: center;
+}
+.ol, li{
+    list-style-position: inside
+}
