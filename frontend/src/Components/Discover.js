@@ -7,11 +7,17 @@ const Discover = () => {
     const [users, setUsers] = useState();
     
     useEffect(() =>{
-        fetch('http://localhost:9000/').then(res => res.json()).then(data => setUsers(data.items))
+        fetch("http://localhost:9000/getusers")
+     .then(res => res.json())
+     .then(data => setUsers(data))
     },[])
+    console.log(users);
     return(
         <div class = "Discover">
             <Navbar />
+            {users.map((user) => {
+                return <p>{user.name}</p>
+            })}
         </div>
 
     )

@@ -8,6 +8,7 @@ const cors = require("cors");
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var userRouter = require('./routes/user')
+var getusersRouter = require('./routes/getUsers')
 
 var app = express();
 
@@ -25,6 +26,7 @@ app.use(cors({ origin: true }));
 app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
+app.use('/getusers', getusersRouter);
 
 app.use(express.json());
 
