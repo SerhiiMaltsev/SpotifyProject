@@ -9,6 +9,7 @@ import Liked from './Components/Liked'
 import TopMusic from './Components/TopMusic'
 import Inbox from './Components/Inbox'
 import Discover from './Components/Discover'
+import Forum from './Components/Forum'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/topmusic" element={<TopMusic />}/>
         <Route path="/inbox" element={<Inbox />}/>
         <Route path="/discover" element = {<Discover />} />
+        <Route path="/forum" element={<Forum />} />
       </Routes>
     </BrowserRouter>
     </AccessTokenProvider>
