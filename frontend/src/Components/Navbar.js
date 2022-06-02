@@ -23,6 +23,9 @@ const Navbar =(props)=>{
     const discoverOnClick = () => {
       navigate("/discover")
     }
+    const LikedOnClick = () => {
+      navigate("/liked")
+    }
     return(<>
     <AppBar position="static" color='secondary'>
         <Toolbar>
@@ -31,9 +34,11 @@ const Navbar =(props)=>{
            <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>Spotify</Typography></IconButton>
             <IconButton size='large' edge='start' padding ='100'color='inherit' aria-label='logo'>
             </IconButton>
-                <Button color='inherit' onClick={TopMusiconClick}style={{backgroundColor: isPage[1] ? 'Violet' : "inherit"}} >Top Music</Button>
-                <Button color='inherit' onClick={inboxonClick}style={{backgroundColor: isPage[2] ? 'Violet' : "inherit"}}>Inbox</Button>
-                <Button color='inherit' onClick={discoverOnClick}style={{backgroundColor: isPage[3] ? 'Violet' : "inherit"}}>Discover</Button>
+            <div className='topMusic'> <Button color='inherit' onClick={TopMusiconClick}style={{backgroundColor: isPage[1] ? 'Violet' : "inherit"}} >Top Music</Button></div>
+                <div className='inbox'> <Button color='inherit' onClick={inboxonClick}style={{backgroundColor: isPage[2] ? 'Violet' : "inherit"}}>Inbox</Button></div>
+                <div className='discover'><Button color='inherit' onClick={discoverOnClick}style={{backgroundColor: isPage[3] ? 'Violet' : "inherit"}}>Discover</Button></div>
+                <div className='liked'><Button color='inherit' onClick={LikedOnClick}style={{backgroundColor: isPage[4] ? 'Violet' : "inherit"}}>Liked</Button></div>
+
                 <div className='logout'><Button color='inherit' onClick={logoutonClick}>Logout</Button></div>
 
         </Toolbar>

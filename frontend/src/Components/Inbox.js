@@ -14,7 +14,7 @@ const Inbox=()=>{
       };
     return(
         <>
-            <Navbar ispage={[false,false,true, false]}/>            
+            <Navbar ispage={[false,false,true, false,false]}/>            
        <List sx={style} component="nav" aria-label="mailbox folders">
            {/* Figure out how to display dynamically */}
   <ListItem button >

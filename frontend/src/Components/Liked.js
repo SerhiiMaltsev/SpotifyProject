@@ -1,23 +1,28 @@
-import { React, useState } from "react"
+import { React, useState,useEffect,useContext } from "react"
 import "./Liked.css"
-import { Button } from '@mui/material'
+import { Button, Divider, Typography } from '@mui/material'
+import Navbar from "./Navbar"
+import { AccessTokenContext } from '../Contexts/accessTokenContext';
 
 function Liked() {
+    const[songs,setSongs] = useState('')
+    const { accessToken } = useContext(AccessTokenContext);
 
+    useEffect(() => {
+
+        fetch("http://localhost:9000/user/songs?token=" + accessToken).then(res => res.json()).then(data => console.log(data))
+         
+       }, [])
     return(
-        <div className = "liked">
-            <div>
-                    <h1>liked songs</h1>
-            </div>
-            <div className = "songsLiked">
-                <ol>
-                    <li>Song 1</li>
-                    <li>Song 2</li>
-                    <li>Song 3</li>
-                </ol>
-            </div>
-        </div>
-
+        <>
+            <Navbar ispage={[false,false,false, false, true]}/> 
+           <p> {songs.length > 0 &&
+                    songs.map((val, key) => {
+                        return <p><b>{val.name}</b> by {val.artists[0].name}<Divider/></p>
+                        
+                })
+                }</p>
+        </>
     )
 }
  
