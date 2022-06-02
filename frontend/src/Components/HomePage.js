@@ -10,7 +10,7 @@ function HomePage() {
     const [songs, setSongs] = useState([])
 
     useEffect(() => {
-     fetch("/user?token="+ accessToken).then(res => res.json()).then(data => setSongs(data.items))
+     fetch("http://localhost:9000/user?token="+ accessToken).then(res => res.json()).then(data => setSongs(data.items))
     }, [])
    
     console.log(songs)
