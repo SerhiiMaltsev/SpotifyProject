@@ -58,7 +58,7 @@ function HomePage(){
                 {artists.length > 0 &&
                     artists.map((val, key) => {
                         return <p>{val.name}</p>
-                    }}
+                    })}
              </div>
     </div>
     )
