@@ -2,7 +2,7 @@ import React from 'react'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useEffect, useState, useContext, Component } from 'react';
 import axios from 'axios';
-import NavBar from './Navbar';
+import Navbar from './Navbar';
 import "./HomePage.css";
 
 function HomePage(){
@@ -44,7 +44,7 @@ function HomePage(){
     return (
 
         <div className ="homepage">
-            <NavBar />
+            <Navbar ispage={[true,false,false, false]}/> 
             <h1 className='welcome'>welcome</h1>
             <p>{username}</p>
             <div className = 'topsongs'>
@@ -56,14 +56,13 @@ function HomePage(){
                 }
             </div>
             <div className = 'topartists'>
-            <h2>Top Artists</h2>
-            {artists.length > 0 &&
-                artists.map((val, key) => {
-                    return <p>{val.name}</p>
-            })
-            }
-            </div>
-        </div>
+                <h2>Top Artists</h2>
+                {artists.length > 0 &&
+                    artists.map((val, key) => {
+                        return <p>{val.name}</p>
+                    })}
+             </div>
+    </div>
     )
 }
 
