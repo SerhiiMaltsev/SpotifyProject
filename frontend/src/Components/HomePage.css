@@ -1,0 +1,18 @@
+.welcome{
+    text-align: center;
+    color: purple;
+}
+
+.topsongs{
+
+}
+.topartists{
+    
+}
+
+.homepage{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+

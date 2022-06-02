@@ -3,7 +3,6 @@ var router = express.Router();
 var fetch = require('node-fetch');
 var auth = require('./auth')
 var dotenv = require('dotenv').config()
-var axios = require('axios');
 const db = require("./firebase")
 
 const {getDocs, setDoc, doc, collection, deleteDoc, updateDoc} = require("firebase/firestore")
@@ -12,13 +11,6 @@ router.get('/', async (req, res, next) => {
     try{
         var username = ""
         var id = ""
-        const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=5'
-        const data = await fetch(url, {headers: {
-            'Authorization': 'Bearer ' + req.query.token
-        }}).catch(err=> console.log(err))
-            .then(res=> res.json())
-            .then(data => data)
-
         await fetch('https://api.spotify.com/v1/me', {
            method: 'GET',
            headers: {
@@ -39,6 +31,39 @@ router.get('/', async (req, res, next) => {
            private: false,
            token: req.query.token
          })
+         res.status(200).send(username)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+
+router.get('/songs', async (req, res, next) => {
+    try{
+        const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5'
+        const data = await fetch(url, {headers: {
+            'Authorization': 'Bearer ' + req.query.token
+        }}).catch(err=> console.log(err))
+            .then(res=> res.json())
+            .then(data => data)
+        console.log("i am in the songs api")
+        res.status(200).send(data)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+
+router.get('/artists', async (req, res, next) => {
+    try{
+        const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=5'
+        const data = await fetch(url, {headers: {
+            'Authorization': 'Bearer ' + req.query.token
+        }}).catch(err=> console.log(err))
+            .then(res=> res.json())
+            .then(data => data)
 
         res.status(200).send(data)
     }
@@ -49,3 +74,5 @@ router.get('/', async (req, res, next) => {
 })
 
 module.exports = router;
+
+
