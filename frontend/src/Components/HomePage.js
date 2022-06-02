@@ -3,6 +3,7 @@ import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Navbar from './Navbar.js'
 
 function HomePage() {
 
@@ -10,14 +11,15 @@ function HomePage() {
     const [songs, setSongs] = useState([])
 
     useEffect(() => {
-
-     fetch("http://localhost:9000/user?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
-      
+     fetch("http://localhost:9000/user?token=" + accessToken)
+     .then(res => res.json())
+     .then(data => setSongs(data.items))
     }, [])
 
     console.log(songs)
     return (
         <div>
+            <Navbar/>
             <h1>welcome</h1>
             {songs.length > 0 &&
                 songs.map((val, key) => {
