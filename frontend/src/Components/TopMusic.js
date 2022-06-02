@@ -1,22 +1,41 @@
-import { React, useState } from 'react'
-import { Button, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
+import { React, useState,useEffect,useContext } from 'react'
+import { Button, Box, FormControl, InputLabel, Select, MenuItem, Typography } from '@mui/material'
 import Navbar from './Navbar'
+import './TopMusic.css'
+import { AccessTokenContext } from '../Contexts/accessTokenContext';
+
 const TopMusic = () =>{
     const [sort, setSort] = useState('');
+    const [songs,setSongs] = useState('');
+    const { accessToken } = useContext(AccessTokenContext);
 
+    useEffect(() => {
+
+        fetch("http://localhost:9000/user?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
+         
+       }, [])
     const handleChange = (event) => {
         setSort(event.target.value);
     };
+    const LikedOnClick=()=>{
+        {songs.length > 0 &&
+            songs.map((val, key) => {
+                return <p>{val.track.name} by {val.track.artists[0].name}</p>
+        })
+        }
+    }
+    const ArtistsOnClicked=()=>{
 
+    }
 
     return(
         <>
         <Navbar/>
-        <div className = "profile">
-            <h1>TOP MUSIC</h1>
-                <Box sx={{ minWidth: 140 }}>
-                <FormControl fullWidth>
-                    <InputLabel id="demo-simple-select-label">Sort</InputLabel>
+        <div className='title'>
+            <Typography variant='h3'>Top Music</Typography></div>
+                <Box sx={{ minWidth: 40 }}>
+                <FormControl fullWidth color='secondary'>
+                    <InputLabel id="demo-simple-select-label" placeholder='Sort'>Sort</InputLabel>
                     <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -30,24 +49,23 @@ const TopMusic = () =>{
                     </Select>
                 </FormControl>
                 </Box>
+                <div className='LBtn'>
+        <Button variant='contained' color='secondary'style={{
+          maxWidth: "100px",
+          maxHeight: "100px",
+          minWidth: "100px",
+          minHeight: "100px"
+        }} onClick={LikedOnClick}>Top 5 Songs</Button> <div className='ABtn'>
+        <Button variant='contained' color='secondary'style={{
+          maxWidth: "100px",
+          maxHeight: "100px",
+          minWidth: "100px",
+          minHeight: "100px"
+        }} onClick={ArtistsOnClicked}>Top 5 Artists</Button></div></div>
 
-            <div className = "songs">
-                <h2>Top 50 Songs</h2>
-                <ol>
-                    <li>Song 1</li>
-                    <li>Song 2</li>
-                    <li>Song 3</li>
-                </ol>
-            </div>
-            <div className = "artists">
-                <h2>Top 50 Artists</h2> 
-                <ol>
-                    <li>Artist 1</li>
-                    <li>Artist 2</li>
-                    <li>Artist 3</li>
-                </ol>
-            </div>
-        </div>
+       
+
+           
         </>
     )
 }

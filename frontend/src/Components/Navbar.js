@@ -28,7 +28,7 @@ const Navbar =()=>{
            <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>Spotify</Typography></IconButton>
             <IconButton size='large' edge='start' padding ='100'color='inherit' aria-label='logo'>
             </IconButton>
-                <Button color='inherit' onClick={TopMusiconClick} >Top Songs</Button>
+                <Button color='inherit' onClick={TopMusiconClick} >Top Music</Button>
                 <Button color='inherit' onClick={inboxonClick}>Inbox</Button>
                 <Button color='inherit'>Profile</Button>
                 <Button color='inherit' onClick={logoutonClick}>Logout</Button>
