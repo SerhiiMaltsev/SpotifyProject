@@ -1,6 +1,6 @@
 import { React, useState } from 'react'
 import { Button, Box, FormControl, InputLabel, Select, MenuItem } from '@mui/material'
-
+import Navbar from './Navbar'
 const TopMusic = () =>{
     const [sort, setSort] = useState('');
 
@@ -10,6 +10,8 @@ const TopMusic = () =>{
 
 
     return(
+        <>
+        <Navbar/>
         <div className = "profile">
             <h1>TOP MUSIC</h1>
                 <Box sx={{ minWidth: 140 }}>
@@ -46,7 +48,7 @@ const TopMusic = () =>{
                 </ol>
             </div>
         </div>
-
+        </>
     )
 }
  
