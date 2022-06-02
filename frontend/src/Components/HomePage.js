@@ -3,6 +3,7 @@ import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
+import Navbar from './Navbar';
 
 function HomePage() {
 
@@ -17,8 +18,9 @@ function HomePage() {
 
     console.log(songs)
     return (
+
         <div>
-            <h1>welcome</h1>
+            <Navbar />
             {songs.length > 0 &&
                 songs.map((val, key) => {
                     return <p>{val.track.name} by {val.track.artists[0].name}</p>

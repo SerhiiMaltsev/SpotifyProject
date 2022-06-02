@@ -8,6 +8,7 @@ import AccessTokenProvider from './Contexts/accessTokenContext'
 import Liked from './Components/Liked'
 import TopMusic from './Components/TopMusic'
 import Inbox from './Components/Inbox'
+import Discover from './Components/Discover'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/liked" element={<Liked />}/>
         <Route path="/topmusic" element={<TopMusic />}/>
         <Route path="/inbox" element={<Inbox />}/>
+        <Route path="/discover" element = {<Discover />} />
       </Routes>
     </BrowserRouter>
     </AccessTokenProvider>

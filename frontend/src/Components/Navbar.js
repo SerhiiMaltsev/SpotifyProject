@@ -19,6 +19,12 @@ const Navbar =()=>{
     function homeonClick(){
         navigate("/")
       }
+    function profileOnClick(){
+        navigate("/home")
+    }
+    const discoverOnClick = () => {
+      navigate("/discover")
+    }
     return(<>
     <AppBar position="static" color='secondary'>
         <Toolbar>
@@ -30,10 +36,9 @@ const Navbar =()=>{
             </IconButton>
                 <Button color='inherit' onClick={TopMusiconClick} >Top Songs</Button>
                 <Button color='inherit' onClick={inboxonClick}>Inbox</Button>
-                <Button color='inherit'>Profile</Button>
+                <Button color='inherit' onClick = {profileOnClick}>Profile</Button>
                 <Button color='inherit' onClick={logoutonClick}>Logout</Button>
-
-            
+                <Button color='inherit' onClick={discoverOnClick}>Discover</Button>
         </Toolbar>
     </AppBar>
 
