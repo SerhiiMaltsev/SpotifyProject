@@ -19,7 +19,7 @@ function HomePage() {
     console.log(songs)
     return (
         <div>
-            <Navbar/>
+            <Navbar ispage={[true,false,false, false]}/>            
             <h1>welcome</h1>
             {songs.length > 0 &&
                 songs.map((val, key) => {
