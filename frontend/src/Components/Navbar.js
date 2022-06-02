@@ -20,6 +20,9 @@ const Navbar =(props)=>{
     function homeonClick(){
         navigate("/home")
       }
+    const discoverOnClick = () => {
+      navigate("/discover")
+    }
     return(<>
     <AppBar position="static" color='secondary'>
         <Toolbar>
@@ -31,6 +34,7 @@ const Navbar =(props)=>{
                 <Button color='inherit' onClick={TopMusiconClick}style={{backgroundColor: isPage[1] ? 'Violet' : "inherit"}} >Top Music</Button>
                 <Button color='inherit' onClick={inboxonClick}style={{backgroundColor: isPage[2] ? 'Violet' : "inherit"}}>Inbox</Button>
                 <Button color='inherit' onClick={logoutonClick}>Logout</Button>
+                <Button color='inherit' onClick={discoverOnClick}>Discover</Button>
         </Toolbar>
     </AppBar>
     </>)

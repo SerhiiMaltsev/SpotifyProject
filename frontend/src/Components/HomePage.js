@@ -9,6 +9,7 @@ function HomePage(){
 
     const { accessToken } = useContext(AccessTokenContext);
     const [songs, setSongs] = useState([])
+
     const [artists, setArtists] = useState([])
     const [username, setUsername] = useState("")
     
@@ -41,6 +42,7 @@ function HomePage(){
 
     
     return (
+
         <div className ="homepage">
             <Navbar ispage={[true,false,false, false]}/> 
             <h1 className='welcome'>welcome</h1>
