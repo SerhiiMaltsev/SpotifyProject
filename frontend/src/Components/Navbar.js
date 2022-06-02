@@ -30,7 +30,6 @@ const Navbar =()=>{
         <Toolbar>
             <IconButton size='large' edge='start' color='inherit' aria-label='logo' onClick={homeonClick}>
                 <LibraryMusicIcon/>
-            
            <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>Spotify</Typography></IconButton>
             <IconButton size='large' edge='start' padding ='100'color='inherit' aria-label='logo'>
             </IconButton>
@@ -41,9 +40,7 @@ const Navbar =()=>{
                 <Button color='inherit' onClick={discoverOnClick}>Discover</Button>
         </Toolbar>
     </AppBar>
-
-
     </>)
 }
- 
+
 export default Navbar
