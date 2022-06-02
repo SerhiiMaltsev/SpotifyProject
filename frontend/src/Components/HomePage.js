@@ -3,7 +3,7 @@ import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useContext } from 'react';
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import Navbar from './Navbar';
 function HomePage() {
     
     const { accessToken } = useContext(AccessTokenContext);
@@ -15,6 +15,8 @@ function HomePage() {
    
     console.log(songs)
     return (
+        <>
+        <Navbar/>
         <div>
             <h1>welcome</h1>
             {songs.length > 0 && 
@@ -23,6 +25,7 @@ function HomePage() {
             })
             }
         </div>
+    </>
     )
 }
 
