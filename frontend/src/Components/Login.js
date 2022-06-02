@@ -3,7 +3,9 @@ import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useContext } from 'react';
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-
+import Navbar from './Navbar';
+import { Button, Grid } from '@mui/material';
+import { margin } from '@mui/system';
 
 function Login() {
 
@@ -35,11 +37,12 @@ function Login() {
     }, [])
 
     return (
-        <div>
-            <button onClick={(e) => onClick(e)}>
-                Log in to App
-            </button>
-        </div>
+        <>
+        <Navbar/>
+        <Grid item marginTop={10} marginLeft={71}>
+            <Button onClick={(e) => onClick(e)} variant='contained' color='secondary'>Log in to App</Button>
+            </Grid>
+        </>
     )
 }
 

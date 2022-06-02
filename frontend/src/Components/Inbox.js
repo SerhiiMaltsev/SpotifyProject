@@ -2,6 +2,7 @@ import Messageicon from './Messageicon'
 import { Divider, Typography
  } from '@mui/material'
  import { List, ListItem, ListItemText } from '@mui/material'
+import Navbar from './Navbar';
 
 const Inbox=()=>{
     const style = {
@@ -13,6 +14,7 @@ const Inbox=()=>{
       };
     return(
         <>
+        <Navbar/>
        <List sx={style} component="nav" aria-label="mailbox folders">
            {/* Figure out how to display dynamically */}
   <ListItem button >
