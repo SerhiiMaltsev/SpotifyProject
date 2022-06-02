@@ -2,7 +2,7 @@ import React from 'react'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import { useEffect, useState, useContext, Component } from 'react';
 import axios from 'axios';
-import NavBar from './Navbar';
+import Navbar from './Navbar';
 import "./HomePage.css";
 
 function HomePage(){
