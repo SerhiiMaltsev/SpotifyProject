@@ -9,10 +9,15 @@
 .topartists{
     
 }
-
+.priv{
+    font-size: smaller;
+}
 .homepage{
     display: flex;
     flex-direction: column;
     text-align: center;
 }
 
+.buttons{
+    margin: 20px;
+}
