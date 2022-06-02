@@ -3,7 +3,7 @@ import { AppBar, Toolbar, IconButton, Grid, Typography, Button,Stack} from '@mui
 import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
 import {useNavigate} from 'react-router-dom'
 import { color } from '@mui/system';
-
+import './Navbar.css'
 const Navbar =(props)=>{
     const [isPage, setPage] = useState(props.ispage)
     let navigate= useNavigate();
@@ -33,8 +33,9 @@ const Navbar =(props)=>{
             </IconButton>
                 <Button color='inherit' onClick={TopMusiconClick}style={{backgroundColor: isPage[1] ? 'Violet' : "inherit"}} >Top Music</Button>
                 <Button color='inherit' onClick={inboxonClick}style={{backgroundColor: isPage[2] ? 'Violet' : "inherit"}}>Inbox</Button>
-                <Button color='inherit' onClick={logoutonClick}>Logout</Button>
-                <Button color='inherit' onClick={discoverOnClick}>Discover</Button>
+                <Button color='inherit' onClick={discoverOnClick}style={{backgroundColor: isPage[3] ? 'Violet' : "inherit"}}>Discover</Button>
+                <div className='logout'><Button color='inherit' onClick={logoutonClick}>Logout</Button></div>
+
         </Toolbar>
     </AppBar>
     </>)
