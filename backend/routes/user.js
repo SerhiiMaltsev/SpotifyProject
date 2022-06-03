@@ -151,7 +151,7 @@ router.get('/getusername', async (req, res, next) => {
 
 router.get('/songs', async (req, res, next) => {
     try{
-        const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5'
+        const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=30'
         const data = await fetch(url, {headers: {
             'Authorization': 'Bearer ' + req.query.token
         }}).catch(err=> console.log(err))
@@ -183,7 +183,7 @@ router.get('/liked', async (req, res, next) => {
 
 router.get('/artists', async (req, res, next) => {
     try{
-        const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=5'
+        const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=30'
         const data = await fetch(url, {headers: {
             'Authorization': 'Bearer ' + req.query.token
         }}).catch(err=> console.log(err))
