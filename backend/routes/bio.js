@@ -24,21 +24,76 @@ router.post('/', async (req, res, next) => {
 })
 router.get('/getbio', async (req, res, next) => {
     try{
-        const docRef = doc(db, "users", String(req.body.id));
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            console.log("bio sent!")
-            res.send(req.body.bio)
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+      var username = ""
+      await fetch('https://api.spotify.com/v1/me', {
+         method: 'GET',
+         headers: {
+           'Accept': 'application/json',
+           "Content-Type" : "application/json",
+           "Authorization": "Bearer " + req.query.token
+         },
+       })
+       .then((response) => response.json())
+       .then((data) => {
+         username = data.display_name;
+       })
+
+
+        let yourBio = {};
+        let listOfUsers = [];
+        const docs = await getDocs(collection(db, "users"))
+        docs.forEach((doc) => listOfUsers.push(doc.data()))
+        for (let i = 0; i < listOfUsers.length; i++) {
+          if(listOfUsers[i].name === username){
+            console.log("YOUR BIO IS HERE ======>>>>>>" + listOfUsers[i].bio)
+            yourBio["bio"] = listOfUsers[i].bio;
           }
+        }
+
+          res.send(yourBio)
     }
     catch(err){
         console.log(err)
         res.status(500).send(err)
     }
 })
+
+router.get('/getprivacy', async (req, res, next) => {
+    try{
+      var username = ""
+      await fetch('https://api.spotify.com/v1/me', {
+         method: 'GET',
+         headers: {
+           'Accept': 'application/json',
+           "Content-Type" : "application/json",
+           "Authorization": "Bearer " + req.query.token
+         },
+       })
+       .then((response) => response.json())
+       .then((data) => {
+         username = data.display_name;
+       })
+
+
+        let yourPrivacy = {};
+        let listOfUsers = [];
+        const docs = await getDocs(collection(db, "users"))
+        docs.forEach((doc) => listOfUsers.push(doc.data()))
+        for (let i = 0; i < listOfUsers.length; i++) {
+          if(listOfUsers[i].name === username){
+            
+            yourPrivacy["privacy"] = listOfUsers[i].private;
+          }
+        }
+        res.send(yourPrivacy)
+
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+
 
 router.post('/privacy', async (req, res, next) => {
     try{
