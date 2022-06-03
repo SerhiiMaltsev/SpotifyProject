@@ -1,20 +1,29 @@
 import { React, useState,useEffect,useContext } from 'react'
-import { Grid, Button, Box, FormControl, InputLabel, Select, MenuItem, Typography, Dialog, DialogTitle } from '@mui/material'
+import { Grid, Button, Box, FormControl, InputLabel, Select, MenuItem, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material'
 import Navbar from './Navbar'
 import './TopMusic.css'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import ClearIcon from '@mui/icons-material/Clear';
+import { Divider } from '@mui/material';
 
 const TopMusic = () =>{
     const [sort, setSort] = useState('');
-    const [songs,setSongs] = useState('');
+    const [songs,setSongs] = useState([]);
+    const[artists,setArtists] = useState([]);
     const { accessToken } = useContext(AccessTokenContext);
     const [likepop, setLikePop] = useState(false);
     const [artistpop, setArtistPop] = useState(false);
+    useEffect(() => {
+
+        fetch("http://localhost:9000/user/artists?token=" + accessToken)
+        .then(res => res.json())
+        .then(data => setArtists(data.items))
+         
+       }, [])
 
     useEffect(() => {
 
-        fetch("http://localhost:9000/user?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
+        fetch("http://localhost:9000/user/songs?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
          
        }, [])
     const handleChange = (event) => {
@@ -23,11 +32,7 @@ const TopMusic = () =>{
     const LikedOnClick=()=>{
         setLikePop(true)
         console.log(likepop)
-        {songs.length > 0 &&
-            songs.map((val, key) => {
-                return <p>{val.track.name} by {val.track.artists[0].name}</p>
-        })
-        }
+        
     }
     const ArtistsOnClicked=()=>{
         setArtistPop(true)
@@ -37,12 +42,13 @@ const TopMusic = () =>{
         setLikePop(false)
         setArtistPop(false)
     }
-
+   
     return(
         <>
-            <Navbar ispage={[false,true, false, false]}/>            
+            <Navbar ispage={[false,true, false, false,false]}/>            
         <div className='title'>
             <Typography variant='h3'>Top Music</Typography></div>
+
                 <Box sx={{ minWidth: 40 }}>
                 <FormControl fullWidth color='secondary'>
                     <InputLabel id="demo-simple-select-label" placeholder='Sort'>Sort</InputLabel>
@@ -75,16 +81,29 @@ const TopMusic = () =>{
         }} onClick={ArtistsOnClicked}>Top 5 Artists</Button></div>
 
         <Dialog open={likepop}>
-            <Grid marginLeft={16}marginTop={1}>
-            <ClearIcon onClick={clickedclear}></ClearIcon></Grid>
-            <DialogTitle><Typography variant='h6'>Top 5 Songs</Typography></DialogTitle>
+            <div className='clear'>
+            <ClearIcon onClick={clickedclear}></ClearIcon></div>
+            <DialogTitle><Typography variant='h3'style={{ fontWeight: 600 }}>Top 5 Songs</Typography>
+            <DialogContent>
+            {songs.length > 0 &&
+                    songs.map((val,key) => {
+                        return <p>{val.name} by {val.artists[0].name}<img src={val.album.images[2].url}></img><Divider/></p>
+                })
+                }
+            </DialogContent>
+</DialogTitle>
 
         </Dialog>
         <Dialog open={artistpop}>
-            <Grid marginLeft={16}marginTop={1}>
-            <ClearIcon onClick={clickedclear}></ClearIcon></Grid>
-            <DialogTitle><Typography variant='h6'>Top 5 Artists</Typography></DialogTitle>
-
+        <div className='clear'>           
+            <ClearIcon onClick={clickedclear}></ClearIcon></div>
+          <DialogTitle><Typography style={{ fontWeight: 600 }}variant='h3'>Top 5 Artists</Typography></DialogTitle>
+        <DialogContent>
+        {artists &&
+                    artists.map((val,key) => {
+                        return <p><img src={val.images[2].url}></img>{val.name}<Divider/></p>
+                    })}
+        </DialogContent>
         </Dialog>
        
 
