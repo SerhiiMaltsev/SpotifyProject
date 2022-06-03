@@ -15,7 +15,7 @@ const Discover = () => {
     console.log(users);
     return(
         <div class = "Discover">
-            <Navbar ispage={[false,false,false, true,false]}/> 
+            <Navbar ispage={[false,false,false, true,false,false]}/> 
             {users.map((user, key) => {
                 return <p>{user.name}</p>
             })}
