@@ -122,10 +122,10 @@ const TopMusic = () =>{
             <ClearIcon onClick={clickedclear}></ClearIcon></div>
             <DialogTitle><Typography variant='h3'style={{ fontWeight: 600 }}>Top 5 Songs</Typography>
             <DialogContent>
-            {/* {songs.length > 0 && 
+            {songs.length > 0 && 
                     songs.map((val,key) => {
                     return <p>{val.name} by {val.artists[0].name}<img src={val.album.images[2].url}></img><Divider/></p>
-                }) */}
+                })
             }
             </DialogContent>
 </DialogTitle>
