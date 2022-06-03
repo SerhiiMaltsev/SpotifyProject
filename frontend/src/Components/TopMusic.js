@@ -15,7 +15,7 @@ const TopMusic = () =>{
     const [artistpop, setArtistPop] = useState(false);
     useEffect(() => {
 
-        fetch("http://localhost:9000/user/artists?token=" + accessToken)
+        fetch("http://localhost:9000/user/artist?token=" + accessToken)
         .then(res => res.json())
         .then(data => setArtists(data.items))
          
@@ -23,7 +23,7 @@ const TopMusic = () =>{
 
     useEffect(() => {
 
-        fetch("http://localhost:9000/user/songs?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
+        fetch("http://localhost:9000/user/song?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
          
        }, [])
     const handleChange = (event) => {
