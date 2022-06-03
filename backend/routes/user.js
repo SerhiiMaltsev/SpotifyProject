@@ -10,6 +10,7 @@ const {getDocs, setDoc, doc, collection, deleteDoc, updateDoc} = require("fireba
 router.get('/', async (req, res, next) => {
     try{
         var username = ""
+        var userDictionary = {}
         var id = ""
         await fetch('https://api.spotify.com/v1/me', {
            method: 'GET',
@@ -22,6 +23,8 @@ router.get('/', async (req, res, next) => {
          .then((response) => response.json())
          .then((data) => {
            console.log('Success:', data.id);
+           userDictionary['username'] = data.display_name;
+           userDictionary['id'] = data.id
            username = data.display_name;
            id = data.id
          })
@@ -29,9 +32,9 @@ router.get('/', async (req, res, next) => {
          await setDoc(doc(db, "users", id), {
            name: username,
            private: false,
-           token: req.query.token
+           token: req.query.token,
          })
-         res.status(200).send(username)
+         res.status(200).send(userDictionary)
     }
     catch(err){
         console.log(err)
@@ -132,7 +135,6 @@ router.get('/songs', async (req, res, next) => {
         }}).catch(err=> console.log(err))
             .then(res=> res.json())
             .then(data => data)
-        console.log("i am in the songs api")
         res.status(200).send(data)
     }
     catch(err){

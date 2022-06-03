@@ -28,17 +28,18 @@ const Inbox=()=>{
 
     return(
         <div className="Inbox">
-        {Object.entries(messages)
-          .map(([key, value]) =>(
-          <p>
-            <p><b>From:</b> {value.sender} </p>
-            <p><b>Recipient:</b> {value.recipient} </p>
-            <p><b>Title:</b> {value.title} </p>
-            <p><b>Date:</b> {value.time} </p>
-            <p>{value.message}</p>
-            <p> -------------------------------- </p>
-          </p>
-        ))}
+          <Navbar ispage={[false,false,true]}/>
+          {Object.entries(messages)
+            .map(([key, value]) =>(
+            <p>
+              <p><b>From:</b> {value.sender} </p>
+              <p><b>Recipient:</b> {value.recipient} </p>
+              <p><b>Title:</b> {value.title} </p>
+              <p><b>Date:</b> {value.time} </p>
+              <p>{value.message}</p>
+              <p> -------------------------------- </p>
+            </p>
+          ))}
         </div>
     )
 }
