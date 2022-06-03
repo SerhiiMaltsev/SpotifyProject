@@ -33,7 +33,6 @@ router.get('/', async (req, res, next) => {
            name: username,
            private: false,
            token: req.query.token,
-           bio: "Set up your bio"
          })
          res.status(200).send(userDictionary)
     }
@@ -136,7 +135,6 @@ router.get('/songs', async (req, res, next) => {
         }}).catch(err=> console.log(err))
             .then(res=> res.json())
             .then(data => data)
-        console.log("i am in the songs api")
         res.status(200).send(data)
     }
     catch(err){
