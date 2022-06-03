@@ -31,7 +31,7 @@ const Navbar =(props)=>{
         <Toolbar>
             <IconButton size='large' edge='start' color='inherit' aria-label='logo' onClick={homeonClick}style={{backgroundColor: isPage[0] ? 'inherit' : "inherit"}}>
                 <LibraryMusicIcon/>
-           <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>Spotify</Typography></IconButton>
+           <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>SpotiSocial</Typography></IconButton>
             <IconButton size='large' edge='start' padding ='100'color='inherit' aria-label='logo'>
             </IconButton>
             <div className='topMusic'> <Button color='inherit' onClick={TopMusiconClick}style={{backgroundColor: isPage[1] ? 'Violet' : "inherit"}} >Top Music</Button></div>

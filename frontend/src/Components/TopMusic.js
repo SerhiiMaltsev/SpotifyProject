@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import './TopMusic.css'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
 import ClearIcon from '@mui/icons-material/Clear';
+import { Divider } from '@mui/material';
 
 const TopMusic = () =>{
     const [sort, setSort] = useState('');
@@ -85,8 +86,8 @@ const TopMusic = () =>{
             <DialogTitle><Typography variant='h3'style={{ fontWeight: 600 }}>Top 5 Songs</Typography>
             <DialogContent>
             {songs.length > 0 &&
-                    songs.map((val, key) => {
-                        return <p>{val.name} by {val.artists[0].name}</p>
+                    songs.map((val,key) => {
+                        return <p>{val.name} by {val.artists[0].name}<img src={val.album.images[2].url}></img><Divider/></p>
                 })
                 }
             </DialogContent>
@@ -98,9 +99,9 @@ const TopMusic = () =>{
             <ClearIcon onClick={clickedclear}></ClearIcon></div>
           <DialogTitle><Typography style={{ fontWeight: 600 }}variant='h3'>Top 5 Artists</Typography></DialogTitle>
         <DialogContent>
-        {artists.length > 0 &&
-                    artists.map((val, key) => {
-                        return <p>{val.name}</p>
+        {artists &&
+                    artists.map((val,key) => {
+                        return <p><img src={val.images[2].url}></img>{val.name}<Divider/></p>
                     })}
         </DialogContent>
         </Dialog>
