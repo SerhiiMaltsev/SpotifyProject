@@ -1,6 +1,6 @@
 .messages{
     margin-top: 5vh;
-    margin-left: 83vh;
+    margin-left: 5%;
 }
 .addPost{
     margin-top: 5vh;
@@ -15,7 +15,7 @@
     margin-top: 5vh;
     margin-bottom: 5vh;
 }
-/* .name{
+.name{
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 2vh;
@@ -30,4 +30,4 @@
     margin-left: 10%;
     margin-right: 10%;
     margin-top: 2vh;
-} */
+}
