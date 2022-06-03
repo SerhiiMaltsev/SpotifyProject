@@ -1,24 +1,29 @@
-import { React, useState } from "react"
+import { React, useState,useEffect,useContext } from "react"
 import "./Liked.css"
-import { Button } from '@mui/material'
+import { Button, Divider, Typography } from '@mui/material'
+import Navbar from "./Navbar"
+import { AccessTokenContext } from '../Contexts/accessTokenContext';
 
 function Liked() {
+    const[songs,setSongs] = useState()
+    const { accessToken } = useContext(AccessTokenContext);
 
+    useEffect(() => {
+
+        fetch("http://localhost:9000/user/liked?token=" + accessToken).then(res => res.json()).then(data => {console.log(data.items);setSongs(data.items);console.log(data.items)})
+         
+       }, [])
     return(
-        <div className = "liked">
-            <div>
-                    <h1>liked songs</h1>
-            </div>
-            <div className = "songsLiked">
-                <ol>
-                    <li>Song 1</li>
-                    <li>Song 2</li>
-                    <li>Song 3</li>
-                </ol>
-            </div>
-        </div>
-
+        <>
+            <Navbar ispage={[false,false,false, false, true]}/> 
+           <div> {songs&&
+                    songs.map((song) => {
+                        return ( <><img src={song.track.album.images[2].url} alt-text="Album image"></img><p><b>{song.track.name}</b><Divider/></p></>                        
+                      )  })
+                }</div>
+        
+        </>
     )
 }
- 
+
 export default Liked

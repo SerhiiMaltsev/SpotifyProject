@@ -140,6 +140,22 @@ router.get('/songs', async (req, res, next) => {
         res.status(500).send(err)
     }
 })
+router.get('/liked', async (req, res, next) => {
+    try{
+        const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20'
+        const data = await fetch(url, {headers: {
+            'Authorization': 'Bearer ' + req.query.token
+        }}).catch(err=> console.log(err))
+            .then(res=> res.json())
+            .then(data => data)
+        console.log("i am in the liked api")
+        res.status(200).send(data)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
 
 router.get('/artists', async (req, res, next) => {
     try{
