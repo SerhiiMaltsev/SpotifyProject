@@ -4,6 +4,7 @@ import Navbar from './Navbar'
 import { List, ListItem, ListItemText } from '@mui/material'
 import Messageicon from './Messageicon'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
+import "./Discover.css"
 
 const style = {
     width: '40%',
@@ -24,16 +25,18 @@ const Discover = () => {
 
     console.log(users);
     return(
-        <div class = "Discover">
+        <div className = "Discover">
             <Navbar ispage={[false,false,false, true]}/>
-            <List sx={style} component="nav" aria-label="mailbox folders">
-            {users.map((user, key) => { return(
-              <ListItem button >
-                <ListItemText primary={user.name}/>
-                <Messageicon recipient={user.name}/>
-              </ListItem>
-            )})}
-            </List>
+            <div className="ListOfUser">
+              <List sx={style} component="nav" aria-label="mailbox folders">
+              {users.map((user, key) => { return(
+                <ListItem button >
+                  <ListItemText primary={user.name}/>
+                  <Messageicon recipient={user.name}/>
+                </ListItem>
+              )})}
+              </List>
+            </div>
         </div>
     )
 
