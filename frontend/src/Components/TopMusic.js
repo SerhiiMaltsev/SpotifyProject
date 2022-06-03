@@ -1,5 +1,5 @@
 import { React, useState,useEffect,useContext } from 'react'
-import { Grid, Button, Box, FormControl, InputLabel, Select, MenuItem, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material'
+import { Grid, Paper,Button, Box, FormControl, InputLabel, Select, MenuItem, Typography, Dialog, DialogTitle, DialogContent } from '@mui/material'
 import Navbar from './Navbar'
 import './TopMusic.css'
 import { AccessTokenContext } from '../Contexts/accessTokenContext';
@@ -31,80 +31,49 @@ const TopMusic = () =>{
     };
     const LikedOnClick=()=>{
         setLikePop(true)
-        console.log(likepop)
+        setArtistPop(false)
         
     }
     const ArtistsOnClicked=()=>{
         setArtistPop(true)
+        setLikePop(false)
     }
 
-    const clickedclear=()=>{
-        setLikePop(false)
-        setArtistPop(false)
-    }
+    
    
     return(
         <>
-            <Navbar ispage={[false,true, false, false,false,false]}/>            
-        <div className='title'>
-            <Typography variant='h3'>Top Music</Typography></div>
+        <Navbar ispage={[false,true, false, false,false,false]}/>            
 
-                <Box sx={{ minWidth: 40 }}>
+                <div className='select'><Box sx={{ maxWidth: 400 }}>
                 <FormControl fullWidth color='secondary'>
                     <InputLabel id="demo-simple-select-label" placeholder='Sort'>Sort</InputLabel>
                     <Select
-                    labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     value={sort}
-                    label="Sort"
+                    label='sort'
                     onChange={handleChange}
                     >
-                    <MenuItem value={"All Time"}>All Time</MenuItem>
-                    <MenuItem value={"Last Year"}>Last Year</MenuItem>
-                    <MenuItem value={"Last Month"}>Last Month</MenuItem>
+                    <MenuItem value={ArtistsOnClicked}>Top Artists</MenuItem>
+                    <MenuItem value={LikedOnClick}>Top Songs</MenuItem>
                     </Select>
                 </FormControl>
                 </Box>
-                <div className='LBtn'>
-        <Button variant='contained' color='secondary'style={{
-          maxWidth: "100px",
-          maxHeight: "100px",
-          minWidth: "100px",
-          minHeight: "100px"
-        }} onClick={LikedOnClick}>Top 5 Songs</Button></div> 
-        <div className='ABtn'>
-        <Button variant='contained' color='secondary'style={{
-          maxWidth: "100px",
-          maxHeight: "100px",
-          minWidth: "100px",
-          minHeight: "100px"
-        }} onClick={ArtistsOnClicked}>Top 5 Artists</Button></div>
-
-        <Dialog open={likepop}>
-            <div className='clear'>
-            <ClearIcon onClick={clickedclear}></ClearIcon></div>
-            <DialogTitle><Typography variant='h3'style={{ fontWeight: 600 }}>Top 5 Songs</Typography>
-            <DialogContent>
-            {songs.length > 0 &&
+                </div>
+        <Paper elevation={0}>
+            
+            {likepop&&songs &&
                     songs.map((val,key) => {
-                        return <p>{val.name} by {val.artists[0].name}<img src={val.album.images[2].url}></img><Divider/></p>
+                        return <p><img src={val.album.images[2].url}></img><br></br>{val.name} by {val.artists[0].name}<Divider/></p>
                 })
                 }
-            </DialogContent>
-</DialogTitle>
-
-        </Dialog>
-        <Dialog open={artistpop}>
-        <div className='clear'>           
-            <ClearIcon onClick={clickedclear}></ClearIcon></div>
-          <DialogTitle><Typography style={{ fontWeight: 600 }}variant='h3'>Top 5 Artists</Typography></DialogTitle>
-        <DialogContent>
-        {artists &&
+            {artistpop && artists &&
                     artists.map((val,key) => {
-                        return <p><img src={val.images[2].url}></img>{val.name}<Divider/></p>
-                    })}
-        </DialogContent>
-        </Dialog>
+                        return <p><img src={val.images[2].url}></img><br></br>{val.name}<Divider/></p>
+                })}
+           
+        </Paper>
+     
        
 
            
