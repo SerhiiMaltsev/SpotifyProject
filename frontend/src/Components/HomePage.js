@@ -10,7 +10,7 @@ function HomePage(){
 
     const { accessToken } = useContext(AccessTokenContext);
     const [songs, setSongs] = useState([])
-    const [isPriv, setIsPriv] = useState(false)
+    const [isPriv, setIsPriv] = useState()
     const [artists, setArtists] = useState([])
     const [username, setUsername] = useState("")
     const [bio, setBio] = useState("")
@@ -44,11 +44,19 @@ function HomePage(){
         .then(data => setArtists(data.items))
 
        }, [])
-    useEffect(() =>{
-       fetch("http://localhost:9000/bio/getbio")
-       .then(res => res.json)
-       .then(data => setBioPage(data))
 
+    useEffect(() =>{
+       fetch("http://localhost:9000/bio/getbio?token=" + accessToken)
+       .then(res => res.json())
+       .then(data => setBio(data.bio))
+
+    }, [])
+
+    useEffect(() =>{
+       fetch("http://localhost:9000/bio/getprivacy?token=" + accessToken)
+       .then(res => res.json())
+       .then(data => setIsPriv(!data.privacy))
+       changePrivacy();
     }, [])
 
 
@@ -60,16 +68,18 @@ function HomePage(){
         .then(res => res.json())
         .then(data => setBioPage(data))
         .catch((err) => console.log(err))
-        setBio("");
+        setBio(bio);
     }
-    const changePrivacy = () => {
-        setIsPriv(!isPriv)
-        axios.post("http://localhost:9000/bio/privacy", {
+    const changePrivacy = async () => {
+        await axios.post("http://localhost:9000/bio/privacy", {
             private: isPriv,
             id: id
         })
+        setIsPriv(!isPriv)
         .catch((err) => console.log(err))
     }
+
+
 
     return (
         <div className ="homepage">
@@ -77,10 +87,10 @@ function HomePage(){
             <div>
             <h1 className='welcome'>USER PROFILE PAGE</h1>
                 <p className = 'username'>{username}</p>
-                <p className='priv'>{isPriv ? 'Currently Private' : 'Currently Public'}</p>
+                <p className='priv'>{isPriv ? 'Currently Public' : 'Currently Private'}</p>
             </div>
 
-            <div>{bioPage}</div>
+            <div>{bio}</div>
             <div className="buttons">
             <div className = 'topsongs'>
                 <h2>Top Songs</h2>
@@ -102,7 +112,7 @@ function HomePage(){
                 <TextField id="outlined-multiline-static" label="bio" multiline maxRows={4} onChange={(e) => {setBio(e.target.value)}}/>
                 <Button className = "submitbutton" size="small" variant="outlined" onClick={() => changeBio()}>SUBMIT</Button>
             <div className="buttons">
-                <Button size="small" onClick = {changePrivacy}>{isPriv ? 'Set Profile to Public' : 'Set Profile to Private'}</Button>
+                <Button size="small" onClick = {changePrivacy}>{isPriv ? 'Change to Private' : 'Change to Public'}</Button>
             </div>
             </div>
             </div>
