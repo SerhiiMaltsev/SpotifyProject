@@ -37,7 +37,7 @@ const Inbox=()=>{
               <p><b>Title:</b> {value.title} </p>
               <p><b>Date:</b> {value.time} </p>
               <p>{value.message}</p>
-              <p> -------------------------------- </p>
+              <Divider/>
             </p>
           ))}
         </div>
