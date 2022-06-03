@@ -16,8 +16,8 @@ function HomePage(){
     const [bio, setBio] = useState("")
     const [bioPage, setBioPage] = useState("")
     const [id, setId] = useState("")
-    
-    
+
+
     useEffect(() => {
 
         fetch("http://localhost:9000/user?token=" + accessToken)
@@ -34,7 +34,7 @@ function HomePage(){
      fetch("http://localhost:9000/user/songs?token=" + accessToken)
      .then(res => res.json())
      .then(data => setSongs(data.items))
-      
+
     }, [])
 
     useEffect(() => {
@@ -42,13 +42,13 @@ function HomePage(){
         fetch("http://localhost:9000/user/artists?token=" + accessToken)
         .then(res => res.json())
         .then(data => setArtists(data.items))
-         
+
        }, [])
     useEffect(() =>{
        fetch("http://localhost:9000/bio/getbio")
        .then(res => res.json)
        .then(data => setBioPage(data))
-    
+
     }, [])
 
 
@@ -73,7 +73,7 @@ function HomePage(){
 
     return (
         <div className ="homepage">
-            <Navbar ispage={[true,false,false, false]}/> 
+            <Navbar ispage={[true,false,false, false]}/>
             <div>
             <h1 className='welcome'>USER PROFILE PAGE</h1>
                 <p className = 'username'>{username}</p>
@@ -111,5 +111,3 @@ function HomePage(){
 }
 
 export default HomePage;
-
-
