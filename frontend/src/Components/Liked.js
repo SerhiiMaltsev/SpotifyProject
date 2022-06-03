@@ -15,7 +15,7 @@ function Liked() {
        }, [])
     return(
         <>
-            <Navbar ispage={[false,false,false, false, true]}/> 
+            <Navbar ispage={[false,false,false, false, true,false]}/> 
            <div> {songs&&
                     songs.map((song) => {
                         return ( <><img src={song.track.album.images[2].url} alt-text="Album image"></img><p><b>{song.track.name}</b><Divider/></p></>                        
