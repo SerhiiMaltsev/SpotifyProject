@@ -151,7 +151,7 @@ router.get('/getusername', async (req, res, next) => {
 
 router.get('/songs', async (req, res, next) => {
     try{
-        const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=30'
+        const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5'
         const data = await fetch(url, {headers: {
             'Authorization': 'Bearer ' + req.query.token
         }}).catch(err=> console.log(err))
@@ -163,6 +163,21 @@ router.get('/songs', async (req, res, next) => {
         console.log(err)
         res.status(500).send(err)
     }
+})
+router.get('/song', async (req, res, next) => {
+  try{
+      const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=30'
+      const data = await fetch(url, {headers: {
+          'Authorization': 'Bearer ' + req.query.token
+      }}).catch(err=> console.log(err))
+          .then(res=> res.json())
+          .then(data => data)
+      res.status(200).send(data)
+  }
+  catch(err){
+      console.log(err)
+      res.status(500).send(err)
+  }
 })
 router.get('/liked', async (req, res, next) => {
     try{
@@ -183,7 +198,7 @@ router.get('/liked', async (req, res, next) => {
 
 router.get('/artists', async (req, res, next) => {
     try{
-        const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=30'
+        const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=5'
         const data = await fetch(url, {headers: {
             'Authorization': 'Bearer ' + req.query.token
         }}).catch(err=> console.log(err))
@@ -196,6 +211,22 @@ router.get('/artists', async (req, res, next) => {
         console.log(err)
         res.status(500).send(err)
     }
+})
+router.get('/artist', async (req, res, next) => {
+  try{
+      const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=10'
+      const data = await fetch(url, {headers: {
+          'Authorization': 'Bearer ' + req.query.token
+      }}).catch(err=> console.log(err))
+          .then(res=> res.json())
+          .then(data => data)
+
+      res.status(200).send(data)
+  }
+  catch(err){
+      console.log(err)
+      res.status(500).send(err)
+  }
 })
 
 module.exports = router;
