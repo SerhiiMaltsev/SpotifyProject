@@ -44,7 +44,7 @@ function HomePage(){
     return (
 
         <div className ="homepage">
-            <Navbar ispage={[true,false,false, false, false]}/> 
+            <Navbar ispage={[true,false,false, false, false,false]}/> 
             <h1 className='welcome'>welcome</h1>
             <p>{username}</p>
             <div className = 'topsongs'>

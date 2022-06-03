@@ -9,7 +9,7 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var userRouter = require('./routes/user')
 var getusersRouter = require('./routes/getUsers')
-
+var getdiscussionsRouter = require('./routes/getDiscussions')
 var app = express();
 
 // view engine setup
@@ -27,6 +27,7 @@ app.use('/', indexRouter);
 app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/getusers', getusersRouter);
+app.use('/getdiscussions', getdiscussionsRouter)
 
 app.use(express.json());
 
