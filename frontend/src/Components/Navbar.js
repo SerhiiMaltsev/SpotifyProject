@@ -26,18 +26,22 @@ const Navbar =(props)=>{
     const forumOnClick = () => {
       navigate("/forum")
     }
+    const LikedOnClick = () => {
+      navigate("/liked")
+    }
     return(<>
     <AppBar position="static" color='secondary'>
         <Toolbar>
             <IconButton size='large' edge='start' color='inherit' aria-label='logo' onClick={homeonClick}style={{backgroundColor: isPage[0] ? 'inherit' : "inherit"}}>
                 <LibraryMusicIcon/>
-           <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>Spotify</Typography></IconButton>
+           <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>SpotiSocial</Typography></IconButton>
             <IconButton size='large' edge='start' padding ='100'color='inherit' aria-label='logo'>
             </IconButton>
-                <Button color='inherit' onClick={TopMusiconClick}style={{backgroundColor: isPage[1] ? 'Violet' : "inherit"}} >Top Music</Button>
-                <Button color='inherit' onClick={inboxonClick}style={{backgroundColor: isPage[2] ? 'Violet' : "inherit"}}>Inbox</Button>
-                <Button color='inherit' onClick={discoverOnClick}style={{backgroundColor: isPage[3] ? 'Violet' : "inherit"}}>Discover</Button>
-                <Button color='inherit' onClick={forumOnClick}style={{backgroundColor: isPage[4] ? 'Violet' : "inherit"}}>Forum</Button>
+            <div className='topMusic'> <Button color='inherit' onClick={TopMusiconClick}style={{backgroundColor: isPage[1] ? 'Violet' : "inherit"}} >Top Music</Button></div>
+                <div className='inbox'> <Button color='inherit' onClick={inboxonClick}style={{backgroundColor: isPage[2] ? 'Violet' : "inherit"}}>Inbox</Button></div>
+                <div className='discover'><Button color='inherit' onClick={discoverOnClick}style={{backgroundColor: isPage[3] ? 'Violet' : "inherit"}}>Discover</Button></div>
+                <div className='liked'><Button color='inherit' onClick={LikedOnClick}style={{backgroundColor: isPage[4] ? 'Violet' : "inherit"}}>Liked</Button></div>
+
                 <div className='logout'><Button color='inherit' onClick={logoutonClick}>Logout</Button></div>
 
         </Toolbar>

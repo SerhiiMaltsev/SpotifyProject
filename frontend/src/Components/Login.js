@@ -41,7 +41,7 @@ function Login() {
           <Toolbar>
             <IconButton size='large' edge='start' color='inherit' aria-label='logo'>
               <LibraryMusicIcon/>
-              <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>Spotify</Typography></IconButton>
+              <Typography variant='h6' fontSize={30} sx={{flexGrow: 1}}>SpotiSocial</Typography></IconButton>
               <IconButton size='large' edge='start' padding ='100'color='inherit' aria-label='logo'>
             </IconButton>
           </Toolbar>
