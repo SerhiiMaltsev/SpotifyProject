@@ -25,7 +25,7 @@ const Forum = () => {
       console.log("discussions", discussions)
     return(
         <>
-        <Navbar ispage={[false,false,false,false,true]}/>            
+        <Navbar ispage={[false,false,false,false,false,true]}/>            
        <List sx={style} component="nav" aria-label="mailbox folders">
         {discussions.map((disc) => {
           return(
