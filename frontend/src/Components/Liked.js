@@ -10,7 +10,7 @@ function Liked() {
 
     useEffect(() => {
 
-        fetch("http://localhost:9000/user/liked?token=" + accessToken).then(res => res.json()).then(data => {console.log(data.items);setSongs(data.items)})
+        fetch("http://localhost:9000/user/liked?token=" + accessToken).then(res => res.json()).then(data => {console.log(data.items);setSongs(data.items);console.log(data.items)})
          
        }, [])
     return(
@@ -18,11 +18,11 @@ function Liked() {
             <Navbar ispage={[false,false,false, false, true]}/> 
            <div> {songs&&
                     songs.map((song) => {
-                        return <p><b>{song.track.name}</b><Divider/></p>                        
-                })
+                        return ( <p><b>{song.track.name}</b><Divider/></p>                        
+                      )  })
                 }</div>
         </>
     )
 }
- 
+
 export default Liked
