@@ -5,7 +5,7 @@ var auth = require('./auth')
 var dotenv = require('dotenv').config()
 const db = require("./firebase")
 
-const {getDocs, setDoc, doc, collection, deleteDoc, updateDoc} = require("firebase/firestore")
+const {getDocs, setDoc, doc, collection, deleteDoc, updateDoc, getDoc} = require("firebase/firestore")
 
 router.get('/', async (req, res, next) => {
     try{
@@ -29,10 +29,32 @@ router.get('/', async (req, res, next) => {
            id = data.id
          })
 
+         let yourBio = "";
+         let listOfUsers = [];
+         const docs = await getDocs(collection(db, "users"))
+         docs.forEach((doc) => listOfUsers.push(doc.data()))
+
+         for (let i = 0; i < listOfUsers.length; i++) {
+           if((listOfUsers[i].name === username)){
+             yourBio = listOfUsers[i].bio;
+           }
+         }
+
+         let yourPrivacy = false;
+         const docs123 = await getDocs(collection(db, "users"))
+         docs123.forEach((doc) => listOfUsers.push(doc.data()))
+
+         for (let i = 0; i < listOfUsers.length; i++) {
+           if((listOfUsers[i].name === username)){
+             yourPrivacy = listOfUsers[i].private;
+           }
+         }
+
          await setDoc(doc(db, "users", id), {
            name: username,
-           private: false,
+           private: yourPrivacy,
            token: req.query.token,
+           bio: yourBio
          })
          res.status(200).send(userDictionary)
     }
