@@ -47,13 +47,13 @@ const Forum =()=>{
     const[Add,setAdd] = useState('')
   
     useEffect(() => {
-        fetch('demos/messages')
+        fetch('discussion/messages')
         .then((res) => res.json())
         .then((text) => {console.log(text) ; setInfo(text.result)})
         .catch((err) => console.log(err))
       }, [])
     const handleSubmit=()=>{
-      axios.post('demos/post',{
+      axios.post('discussion/post',{
         username: Name,
         message:Message
       })
@@ -80,9 +80,9 @@ const Forum =()=>{
 
        <DialogTitle><Typography variant="h4">Add New Post</Typography></DialogTitle>
 
-      <div className="name"><TextField placeholder="Name" margin='normal'onChange={(e) => {setName(e.target.value)}}>Name</TextField></div>
-      <div className="title"><TextField placeholder="Title" onChange={(e) => {setTitle(e.target.value)}}>Title</TextField></div>
-      <div className="message"><TextField placeholder="Message" onChange={(e) => {setMessage(e.target.value)}}>Message</TextField></div>
+      <div className="name"><TextField placeholder="Name" color='secondary'onChange={(e) => {setName(e.target.value)}}>Name</TextField></div>
+      <div className="title"><TextField placeholder="Title"color='secondary' onChange={(e) => {setTitle(e.target.value)}}>Title</TextField></div>
+      <div className="message"><TextField placeholder="Message"color='secondary' onChange={(e) => {setMessage(e.target.value)}} multiline>Message</TextField></div>
       
   
       <div className="addbtn">
@@ -91,7 +91,7 @@ const Forum =()=>{
       </div>
       </Dialog>
       {Info && Info.map((item)=> <div className="messages">
-        <Typography >Name:  {item.username} <br></br> 
+        <Typography >Name:  {item.name} <br></br> 
         Title: {item.title} <br></br>   
       Message:  {item.message}</Typography></div>
       )}
