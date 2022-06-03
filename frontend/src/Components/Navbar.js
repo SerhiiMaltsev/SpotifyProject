@@ -43,7 +43,6 @@ const Navbar =(props)=>{
                 <div className='liked'><Button color='inherit' onClick={LikedOnClick}style={{backgroundColor: isPage[4] ? 'Violet' : "inherit"}}>Liked</Button></div>
                 <div className='forum'><Button color='inherit' onClick={forumOnClick} style={{backgroundColor: isPage[5] ? 'Violet' : "inherit"}}>Forum</Button></div>
                 <div className='logout'><Button color='inherit' onClick={logoutonClick}>Logout</Button></div>
-
         </Toolbar>
     </AppBar>
     </>)

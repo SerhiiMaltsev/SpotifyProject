@@ -13,26 +13,63 @@ const TopMusic = () =>{
     const { accessToken } = useContext(AccessTokenContext);
     const [likepop, setLikePop] = useState(false);
     const [artistpop, setArtistPop] = useState(false);
+    const [lastMonth, setLastMonth] = useState(false);
+    const [lastSixMonths, setLastSixMonths] = useState(true);
+    const [allTime, setAllTime] = useState(false);
     useEffect(() => {
+        getSongsAndArtists();
+    }, [])
 
-        fetch("http://localhost:9000/user/artists?token=" + accessToken)
-        .then(res => res.json())
-        .then(data => setArtists(data.items))
-         
-       }, [])
-
-    useEffect(() => {
-
-        fetch("http://localhost:9000/user/songs?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
-         
-       }, [])
+    const getSongsAndArtists = () => {
+        if(lastSixMonths){
+            console.log("Laast Six months fetched")
+            fetch("http://localhost:9000/user/artists?token=" + accessToken)
+            .then(res => res.json())
+            .then(data => setArtists(data.items))
+    
+            fetch("http://localhost:9000/user/songs?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
+            console.log("songsSixMonths", songs);
+        }
+        else if(allTime){
+            console.log("All time fetched ")
+            fetch("http://localhost:9000/user/artistsalltime?token=" + accessToken)
+            .then(res => res.json())
+            .then(data => setArtists(data.items))
+    
+            fetch("http://localhost:9000/user/songsalltime?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
+            console.log("songsAllTime", songs);
+        }
+        else if(lastMonth){
+            fetch("http://localhost:9000/user/artistslastmonth?token=" + accessToken)
+            .then(res => res.json())
+            .then(data => setArtists(data.items))
+    
+            fetch("http://localhost:9000/user/songslastmonth?token=" + accessToken).then(res => res.json()).then(data => setSongs(data.items))
+            console.log("last months fetched");
+        }
+    }
     const handleChange = (event) => {
         setSort(event.target.value);
+        console.log("sort", sort);
+        if(String(sort) === "All Time"){
+            setAllTime(true);
+            setLastSixMonths(false);
+            setLastMonth(false);
+        }
+        else if(String(sort) === "Last Six Months"){
+            setAllTime(false);
+            setLastSixMonths(true);
+            setLastMonth(false);
+        }
+        else if(String(sort) === "Last Month") {
+            setAllTime(false);
+            setLastSixMonths(false);
+            setLastMonth(true);
+        }
+        getSongsAndArtists();
     };
     const LikedOnClick=()=>{
-        setLikePop(true)
-        console.log(likepop)
-        
+        setLikePop(true)       
     }
     const ArtistsOnClicked=()=>{
         setArtistPop(true)
@@ -60,7 +97,7 @@ const TopMusic = () =>{
                     onChange={handleChange}
                     >
                     <MenuItem value={"All Time"}>All Time</MenuItem>
-                    <MenuItem value={"Last Year"}>Last Year</MenuItem>
+                    <MenuItem value={"Last Year"}>Last Six Months</MenuItem>
                     <MenuItem value={"Last Month"}>Last Month</MenuItem>
                     </Select>
                 </FormControl>
@@ -85,11 +122,11 @@ const TopMusic = () =>{
             <ClearIcon onClick={clickedclear}></ClearIcon></div>
             <DialogTitle><Typography variant='h3'style={{ fontWeight: 600 }}>Top 5 Songs</Typography>
             <DialogContent>
-            {songs.length > 0 &&
+            {/* {songs.length > 0 && 
                     songs.map((val,key) => {
-                        return <p>{val.name} by {val.artists[0].name}<img src={val.album.images[2].url}></img><Divider/></p>
-                })
-                }
+                    return <p>{val.name} by {val.artists[0].name}<img src={val.album.images[2].url}></img><Divider/></p>
+                }) */}
+            }
             </DialogContent>
 </DialogTitle>
 

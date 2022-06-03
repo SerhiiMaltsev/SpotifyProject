@@ -55,6 +55,38 @@ router.get('/songs', async (req, res, next) => {
         res.status(500).send(err)
     }
 })
+router.get('/songsalltime', async (req, res, next) => {
+    try{
+        const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5*&time_range=long_term'
+        const data = await fetch(url, {headers: {
+            'Authorization': 'Bearer ' + req.query.token
+        }}).catch(err=> console.log(err))
+            .then(res=> res.json())
+            .then(data => data)
+        console.log("i am in the songs api")
+        res.status(200).send(data)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+router.get('/songslastmonth', async (req, res, next) => {
+    try{
+        const url = 'https://api.spotify.com/v1/me/top/tracks?offset=0&limit=5*&time_range=short_term'
+        const data = await fetch(url, {headers: {
+            'Authorization': 'Bearer ' + req.query.token
+        }}).catch(err=> console.log(err))
+            .then(res=> res.json())
+            .then(data => data)
+        console.log("i am in the songs api")
+        res.status(200).send(data)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
 router.get('/liked', async (req, res, next) => {
     try{
         const url = 'https://api.spotify.com/v1/me/tracks?offset=0&limit=20'
@@ -88,7 +120,38 @@ router.get('/artists', async (req, res, next) => {
         res.status(500).send(err)
     }
 })
+router.get('/artistsalltime', async (req, res, next) => {
+    try{
+        const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=5&time_range=long_term'
+        const data = await fetch(url, {headers: {
+            'Authorization': 'Bearer ' + req.query.token
+        }}).catch(err=> console.log(err))
+            .then(res=> res.json())
+            .then(data => data)
 
+        res.status(200).send(data)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+router.get('/artistslastmonth', async (req, res, next) => {
+    try{
+        const url = 'https://api.spotify.com/v1/me/top/artists?offset=0&limit=5&time_range=short_term'
+        const data = await fetch(url, {headers: {
+            'Authorization': 'Bearer ' + req.query.token
+        }}).catch(err=> console.log(err))
+            .then(res=> res.json())
+            .then(data => data)
+
+        res.status(200).send(data)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
 module.exports = router;
 
 
