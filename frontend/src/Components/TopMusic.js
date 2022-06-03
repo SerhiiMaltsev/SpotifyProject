@@ -82,7 +82,7 @@ const TopMusic = () =>{
    
     return(
         <>
-            <Navbar ispage={[false,true, false, false,false]}/>            
+            <Navbar ispage={[false,true, false, false,false,false]}/>            
         <div className='title'>
             <Typography variant='h3'>Top Music</Typography></div>
 

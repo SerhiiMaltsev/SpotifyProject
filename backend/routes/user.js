@@ -10,6 +10,7 @@ const {getDocs, setDoc, doc, collection, deleteDoc, updateDoc} = require("fireba
 router.get('/', async (req, res, next) => {
     try{
         var username = ""
+        var userDictionary = {}
         var id = ""
         await fetch('https://api.spotify.com/v1/me', {
            method: 'GET',
@@ -22,6 +23,8 @@ router.get('/', async (req, res, next) => {
          .then((response) => response.json())
          .then((data) => {
            console.log('Success:', data.id);
+           userDictionary['username'] = data.display_name;
+           userDictionary['id'] = data.id
            username = data.display_name;
            id = data.id
          })
@@ -29,7 +32,92 @@ router.get('/', async (req, res, next) => {
          await setDoc(doc(db, "users", id), {
            name: username,
            private: false,
-           token: req.query.token
+           token: req.query.token,
+         })
+         res.status(200).send(userDictionary)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+
+router.post('/getinbox', async (req, res, next) => {
+    try{
+        console.log("This api is accessed")
+        let username = "";
+        await fetch('https://api.spotify.com/v1/me', {
+           method: 'GET',
+           headers: {
+             'Accept': 'application/json',
+             "Content-Type" : "application/json",
+             "Authorization": "Bearer " + req.query.token
+           },
+         })
+         .then((response) => response.json())
+         .then((data) => {
+           console.log(data);
+           username = data.display_name;
+         })
+
+        let allMessages = [];
+        let yourMessages = [];
+        const docs = await getDocs(collection(db, "textmessages"))
+        docs.forEach((doc) => allMessages.push(doc.data()))
+
+        for (let i = 0; i < allMessages.length; i++) {
+          console.log(username)
+          if((allMessages[i].sender === username) || (allMessages[i].recipient === username)){
+            yourMessages.push(allMessages[i])
+          }
+        }
+
+        res.status(200).send(yourMessages)
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+
+
+router.post('/sendmessage', async (req, res, next) => {
+    try{
+        console.log(req.body.time);
+        await setDoc(doc(db, "textmessages", String(req.body.time)), {
+          sender: req.body.sender,
+          recipient: req.body.recipient,
+          title: req.body.title,
+          message: req.body.body,
+          time: req.body.time
+        })
+        res.status(200).send("API for sending messages works")
+    }
+    catch(err){
+        console.log(err)
+        res.status(500).send(err)
+    }
+})
+
+
+
+router.get('/getusername', async (req, res, next) => {
+    try{
+        console.log("this API works")
+        var username = {}
+        var id = ""
+        await fetch('https://api.spotify.com/v1/me', {
+           method: 'GET',
+           headers: {
+             'Accept': 'application/json',
+             "Content-Type" : "application/json",
+             "Authorization": "Bearer " + req.query.token
+           },
+         })
+         .then((response) => response.json())
+         .then((data) => {
+           console.log('Success:', data.display_name);
+           username["username"] = data.display_name;
          })
          res.status(200).send(username)
     }
@@ -47,7 +135,6 @@ router.get('/songs', async (req, res, next) => {
         }}).catch(err=> console.log(err))
             .then(res=> res.json())
             .then(data => data)
-        console.log("i am in the songs api")
         res.status(200).send(data)
     }
     catch(err){
@@ -153,5 +240,3 @@ router.get('/artistslastmonth', async (req, res, next) => {
     }
 })
 module.exports = router;
-
-

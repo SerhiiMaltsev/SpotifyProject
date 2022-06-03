@@ -4,28 +4,37 @@ import { useEffect, useState, useContext, Component } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
 import "./HomePage.css";
+import { Button, TextField } from '@mui/material';
 
 function HomePage(){
 
     const { accessToken } = useContext(AccessTokenContext);
     const [songs, setSongs] = useState([])
-
+    const [isPriv, setIsPriv] = useState(false)
     const [artists, setArtists] = useState([])
     const [username, setUsername] = useState("")
-    
+    const [bio, setBio] = useState("")
+    const [bioPage, setBioPage] = useState("")
+    const [id, setId] = useState("")
+
+
     useEffect(() => {
 
         fetch("http://localhost:9000/user?token=" + accessToken)
         .then(res => res.json())
-        .then(data => setUsername(data))
+        .then(data => {setUsername(data.username)
+        setId(data.id)
+        setBioPage(data.bio)
+        })
          console.log(username)
        }, [])
+
     useEffect(() => {
 
      fetch("http://localhost:9000/user/songs?token=" + accessToken)
      .then(res => res.json())
      .then(data => setSongs(data.items))
-      
+
     }, [])
 
     useEffect(() => {
@@ -33,20 +42,46 @@ function HomePage(){
         fetch("http://localhost:9000/user/artists?token=" + accessToken)
         .then(res => res.json())
         .then(data => setArtists(data.items))
-         
+
        }, [])
-       console.log(songs)
+    useEffect(() =>{
+       fetch("http://localhost:9000/bio/getbio")
+       .then(res => res.json)
+       .then(data => setBioPage(data))
 
-       console.log(artists)
+    }, [])
 
 
-    
+    const changeBio = () => {
+        axios.post("http://localhost:9000/bio", {
+            bio: bio,
+            id: id
+        })
+        .then(res => res.json())
+        .then(data => setBioPage(data))
+        .catch((err) => console.log(err))
+        setBio("");
+    }
+    const changePrivacy = () => {
+        setIsPriv(!isPriv)
+        axios.post("http://localhost:9000/bio/privacy", {
+            private: isPriv,
+            id: id
+        })
+        .catch((err) => console.log(err))
+    }
+
     return (
-
         <div className ="homepage">
-            <Navbar ispage={[true,false,false, false, false]}/> 
-            <h1 className='welcome'>welcome</h1>
-            <p>{username}</p>
+            <Navbar ispage={[true,false,false, false]}/>
+            <div>
+            <h1 className='welcome'>USER PROFILE PAGE</h1>
+                <p className = 'username'>{username}</p>
+                <p className='priv'>{isPriv ? 'Currently Private' : 'Currently Public'}</p>
+            </div>
+
+            <div>{bioPage}</div>
+            <div className="buttons">
             <div className = 'topsongs'>
                 <h2>Top Songs</h2>
                 {songs.length > 0 &&
@@ -62,10 +97,17 @@ function HomePage(){
                         return <p>{val.name}</p>
                     })}
              </div>
+             <div className = 'edit'>
+                 <h4 className ='editHeader'>Edit Your Bio</h4>
+                <TextField id="outlined-multiline-static" label="bio" multiline maxRows={4} onChange={(e) => {setBio(e.target.value)}}/>
+                <Button className = "submitbutton" size="small" variant="outlined" onClick={() => changeBio()}>SUBMIT</Button>
+            <div className="buttons">
+                <Button size="small" onClick = {changePrivacy}>{isPriv ? 'Set Profile to Public' : 'Set Profile to Private'}</Button>
+            </div>
+            </div>
+            </div>
     </div>
     )
 }
 
 export default HomePage;
-
-
