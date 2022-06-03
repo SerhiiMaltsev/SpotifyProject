@@ -8,10 +8,13 @@ const cors = require("cors");
 var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var userRouter = require('./routes/user')
+var discussionRouter = require('./routes/discussion')
 var getusersRouter = require('./routes/getUsers')
 
-var getdiscussionsRouter = require('./routes/getDiscussions')
+
+
 var getbioRouter = require('./routes/bio')
+
 
 var app = express();
 
@@ -31,8 +34,10 @@ app.use('/auth', authRouter);
 app.use('/user', userRouter);
 app.use('/getusers', getusersRouter);
 
-app.use('/getdiscussions', getdiscussionsRouter)
 app.use('/bio', getbioRouter);
+
+app.use('/discussion', discussionRouter);
+
 
 
 app.use(express.json());

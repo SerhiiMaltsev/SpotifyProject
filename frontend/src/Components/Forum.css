@@ -1,0 +1,33 @@
+.messages{
+    margin-top: 5vh;
+    margin-left: 5%;
+}
+.addPost{
+    margin-top: 5vh;
+    margin-left: 45%;
+}
+.clear{
+    margin-top: 2vh;
+    margin-left: 85%;
+}
+.addbtn{
+    margin-left: 37%;
+    margin-top: 5vh;
+    margin-bottom: 5vh;
+}
+.name{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}
+.title{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+}.message{
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 2vh;
+}
