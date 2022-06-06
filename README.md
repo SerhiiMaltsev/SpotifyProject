@@ -57,8 +57,16 @@ We have 3 collections in our Firebase database: “users”, “textmessages”,
 Links: Tutorials and screencasts discussing different ways of using the API used in Friendify.
 
 Spotify API + Methods
+https://developer.spotify.com/documentation/web-api/
+https://developer.spotify.com/documentation/web-api/reference/#/
 Spotify App Settings
+https://developer.spotify.com/documentation/general/guides/authorization/app-settings/
 Spotify Authorization (don’t use PKCE extension) + Scopes
+https://developer.spotify.com/documentation/general/guides/authorization/code-flow/
+https://developer.spotify.com/documentation/general/guides/authorization/scopes
 Express
+https://www.section.io/engineering-education/how-to-setup-nodejs-express-for-react/
 Firebase
+https://firebase.google.com/docs/firestore
 Material UI
+https://mui.com/
